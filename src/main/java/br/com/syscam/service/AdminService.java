@@ -1,6 +1,6 @@
 package br.com.syscam.service;
 
-import br.com.syscam.model.Pessoa;
+import br.com.syscam.model.Administrador;
 import br.com.syscam.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,16 +9,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PessoaService {
+public class AdminService {
 
     @Autowired
     private PessoaRepository repository;
 
-    public boolean salvar(Pessoa pessoa) {
+    public boolean salvar(Administrador administrador) {
 
         try {
-            if (!buscar(pessoa.getEmail()).isPresent()) {
-                this.repository.save(pessoa);
+            if (!buscar(administrador.getEmail()).isPresent()) {
+                this.repository.save(administrador);
                 return true;
             }else {
                 return false;
@@ -29,19 +29,19 @@ public class PessoaService {
         }
     }
 
-    public Optional<Pessoa> buscar(String email) {
+    public Optional<Administrador> buscar(String email) {
         return this.repository.findById(email);
     }
 
-    public boolean atualizar(Pessoa pessoa) {
-        if (buscar(pessoa.getEmail()).isPresent()) {
-            this.repository.save(pessoa);
+    public boolean atualizar(Administrador administrador) {
+        if (buscar(administrador.getEmail()).isPresent()) {
+            this.repository.save(administrador);
             return true;
         }
         return false;
     }
 
-    public List<Pessoa> listar() {
+    public List<Administrador> listar() {
         return this.repository.findAll();
 
 
