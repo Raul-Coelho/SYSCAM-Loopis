@@ -21,8 +21,13 @@ public class ProdutoController {
     @PostMapping
     public @ResponseBody boolean salvar(@RequestBody Produto produto){
         try{
-            produtoRepository.save(produto);
-            return true;
+            if(!buscar(produto.getCodigo()).isPresent()){
+                produtoRepository.save(produto);
+                return true;
+            }else{
+                return false;
+            }
+
         }catch (Exception e){
             return false;
         }
@@ -51,8 +56,11 @@ public class ProdutoController {
     @DeleteMapping("/{codigo}")
     public @ResponseBody boolean remover(@RequestBody int codigo){
         try{
-            produtoRepository.deleteById(codigo);
-            return true;
+            if(buscar(codigo).isPresent()){
+                produtoRepository.deleteById(codigo);
+                return true;
+            }
+            return false;
         }catch (Exception e){
             return false;
         }

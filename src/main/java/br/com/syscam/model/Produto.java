@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name = "produto")
 @Entity
 public class Produto {
 
@@ -22,6 +21,17 @@ public class Produto {
     private Double preco;
     private String fornecedor;
     private int quantidade;
+
+    public Produto() {
+    }
+
+    public Produto(String descricao, CategoriaProduto categoria, Double preco, String fornecedor, int quantidade) {
+        this.descricao = descricao;
+        this.categoria = categoria;
+        this.preco = preco;
+        this.fornecedor = fornecedor;
+        this.quantidade = quantidade;
+    }
 
     public int getCodigo() {
         return codigo;
