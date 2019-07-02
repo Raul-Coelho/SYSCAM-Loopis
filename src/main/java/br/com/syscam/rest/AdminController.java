@@ -14,8 +14,6 @@ import java.util.Optional;
 public class AdminController {
 
     @Autowired
-    private PessoaRepository repository;
-
     private AdminService service;
 
     @PostMapping
@@ -25,7 +23,7 @@ public class AdminController {
            if(buscar(administrador.getCodigo()).isPresent()){
                return false;
            }else {
-               repository.save(administrador);
+               service.salvar(administrador);
                return true;
            }
         } catch (Exception e) {
@@ -36,19 +34,19 @@ public class AdminController {
 
     @GetMapping("/{codigo}")
     public @ResponseBody Optional<Administrador> buscar(@PathVariable("codigo") Integer codigo) {
-        return repository.findById(codigo);
+        return service.buscar(codigo);
     }
 
     @GetMapping
     public @ResponseBody List<Administrador> listar(){
-        return repository.findAll();
+        return service.listar();
     }
 
 
     @PutMapping
     public @ResponseBody boolean atualizar(@RequestBody Administrador administrador) {
         if (buscar(administrador.getCodigo()).isPresent()) {
-            this.repository.save(administrador);
+            this.service.atualizar(administrador);
             return true;
         }
         return false;
@@ -58,7 +56,7 @@ public class AdminController {
     public @ResponseBody boolean remover(@PathVariable("codigo") Integer codigo){
         try{
             if(buscar(codigo).isPresent()){
-                repository.deleteById(codigo);
+                service.remover(codigo);
                 return true;
             }
             return false;
