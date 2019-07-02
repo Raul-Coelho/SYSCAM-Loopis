@@ -14,6 +14,7 @@ import java.util.Objects;
 @Entity
 public class Administrador {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_admin")

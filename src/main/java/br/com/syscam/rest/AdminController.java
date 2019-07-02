@@ -22,14 +22,11 @@ public class AdminController {
     public @ResponseBody boolean salvar(@RequestBody Administrador administrador) {
 
         try {
-//            if(!buscar(administrador.getEmail()).isPresent()){
-//                repository.save(administrador);
-//                return true;
-//            }
-//            return false;
-
-            repository.save(administrador);
-            return true;
+            if(!buscar(administrador.getCodigo()).isPresent()){
+                repository.save(administrador);
+                return true;
+            }
+            return false;
 
         } catch (Exception e) {
 
@@ -37,9 +34,9 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/{email}")
-    public @ResponseBody Optional<Administrador> buscar(@PathVariable("email") String email) {
-        return repository.findById(email);
+    @GetMapping("{codigo}")
+    public @ResponseBody Optional<Administrador> buscar(@PathVariable("codigo") Integer codigo) {
+        return repository.findById(codigo);
     }
 
     @GetMapping
@@ -50,22 +47,22 @@ public class AdminController {
 
     @PutMapping
     public @ResponseBody boolean atualizar(@RequestBody Administrador administrador) {
-        if (buscar(administrador.getEmail()).isPresent()) {
+        if (buscar((administrador.getCodigo())).isPresent()) {
             this.repository.save(administrador);
             return true;
         }
         return false;
     }
 
-    @DeleteMapping("/{email}")
-    public @ResponseBody boolean remover(@RequestBody String email){
+    @DeleteMapping("/{codigo}")
+    public @ResponseBody boolean remover(@RequestBody Integer codigo){
         try{
 //            if(buscar(email).isPresent()){
 //                repository.deleteById(email);
 //                return true;
 //            }
 //            return false;
-            repository.deleteById(email);
+            repository.deleteById(codigo);
             return true;
         }catch (Exception e){
             return false;
