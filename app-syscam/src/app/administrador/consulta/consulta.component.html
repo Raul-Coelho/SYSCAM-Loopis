@@ -5,7 +5,11 @@
     <tr>
         <th>Código</th>
         <th>Nome</th>
-        <th>Reg. Ativo</th>
+        <th>Email</th>
+        <th>Senha</th>
+        <th>Cpf</th>
+        <th>Nascimento</th>
+
         <th>Editar</th>
         <th>Excluir</th>
     </tr>
@@ -15,15 +19,16 @@
         <tr *ngFor="let admin of admins; let i = index;">
         <td>{{ admin.codigo }}</td>        
         <td>{{ admin.nome }}</td>
-        <td>{{ admin.email }}</td>        
+        <td>{{ admin.email }}</td>
+        <td>{{ admin.senha }}</td>         
         <td>{{ admin.cpf }}</td>        
-        <td>{{ admin.nascimento }}</td>       
+        <td>{{ admin.nascimento | date: 'dd/MM/yyyy' }}</td>       
         
         <td><a (click)="editar(admin.codigo);">Editar</a></td>
-        <td><a (click)="excluir(admin.codigo, i);">Excluir</a></td>
+        <td><a (click)="deletar(admin.codigo, i);">Excluir</a></td>
         </tr>
         <tr>
-           <td colspan="6" style="text-align: right;">Total de Registros: {{ pessoas.length }}</td> 
+           <td colspan="6" style="text-align: right;">Total de Registros: {{ admins?.length }}</td> 
         </tr>
     </tbody>
 </table>

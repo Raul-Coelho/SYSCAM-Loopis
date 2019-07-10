@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class CadastroComponent implements OnInit {
 
   private titulo:string;
-  private admin:Administrador = new Administrador;
+  private admin:any;
 
   constructor(private administradorService: AdministradorService, 
     private router: Router, 
@@ -21,11 +21,12 @@ export class CadastroComponent implements OnInit {
 
     this.activatedRoute.params.subscribe(parametro => {
       if(parametro["codigo"] == undefined){
-        this.titulo = "Cadastro de Novo ADMIN"
+        this.titulo = "Cadastro de Novo ADMIN";
+        this.admin = new Administrador();
       }
       else{
         this.titulo = "Editar informações de Admin"
-        // this.administradorService.getAdministrador(Number(parametro["codigo"])).subscribe(res => this.admin = res);
+        this.administradorService.getAdministrador(Number(parametro["codigo"])).subscribe(res => this.admin = res);
       }
     });
   }

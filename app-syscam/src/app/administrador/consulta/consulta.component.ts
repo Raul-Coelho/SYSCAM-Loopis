@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ConsultaComponent implements OnInit {
 
-  private admins:Administrador[] = new Array();
+  private admins:any;
   private titulo:string;
 
   constructor(private administradorService:AdministradorService, private router: Router) {
@@ -19,7 +19,7 @@ export class ConsultaComponent implements OnInit {
 
   ngOnInit() {
     this.titulo = "Registros Cadastrados!";
-    this.administradorService.getAdministradores().subscribe(res => this.admins);
+    this.administradorService.getAdministradores().subscribe(res => this.admins = res);
   }
 
   deletar(codigo:number, index:number): void{
@@ -31,7 +31,7 @@ export class ConsultaComponent implements OnInit {
   }
 
   editar(codigo:number):void{
-    this.router.navigate(['consulta-admin',codigo]);
+    this.router.navigate(['cadastro-admin',codigo]);
   }
 
 
