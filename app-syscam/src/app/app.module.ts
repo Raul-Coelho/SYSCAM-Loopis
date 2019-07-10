@@ -12,6 +12,7 @@ import { CadastroComponent } from './administrador/cadastro/cadastro.component';
 import { ConsultaComponent } from './administrador/consulta/consulta.component';
 import { MenuComponent } from './administrador/menu/menu.component';
 import { routing } from 'src/app.routes';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms/'
 
 @NgModule({
   declarations: [
@@ -19,13 +20,16 @@ import { routing } from 'src/app.routes';
     HomeComponent,
     CadastroComponent,
     ConsultaComponent,
-    MenuComponent
+    MenuComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    routing
+    routing,
+    FormsModule
+
   ],
   providers: [
     ConfigService,
