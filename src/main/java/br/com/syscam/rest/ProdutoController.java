@@ -13,16 +13,15 @@ import java.util.Optional;
 @RequestMapping("/produtos")
 public class ProdutoController {
 
-    @Autowired
-    private ProdutoRepository produtoRepository;
 
+    @Autowired
     private ProdutoService produtoService;
 
     @PostMapping
     public @ResponseBody boolean salvar(@RequestBody Produto produto){
         try{
             if(!buscar(produto.getCodigo()).isPresent()){
-                produtoRepository.save(produto);
+                produtoService.salvar(produto);
                 return true;
             }else{
                 return false;
@@ -36,18 +35,18 @@ public class ProdutoController {
 
     @GetMapping("/{codigo}")
     public @ResponseBody Optional<Produto> buscar(@PathVariable("codigo") int codigo ){
-        return produtoRepository.findById(codigo);
+        return produtoService.buscar(codigo);
     }
 
     @GetMapping
     public @ResponseBody List<Produto> listar(){
-        return produtoRepository.findAll();
+        return produtoService.listar();
     }
 
     @PutMapping
     public @ResponseBody boolean atualizar (@RequestBody Produto produto ){
         if(buscar(produto.getCodigo()).isPresent()){
-            produtoRepository.save(produto);
+            produtoService.salvar(produto);
             return true;
         }
         return false;
@@ -57,7 +56,7 @@ public class ProdutoController {
     public @ResponseBody boolean remover(@RequestBody int codigo){
         try{
             if(buscar(codigo).isPresent()){
-                produtoRepository.deleteById(codigo);
+                produtoService.deletar(codigo);
                 return true;
             }
             return false;
