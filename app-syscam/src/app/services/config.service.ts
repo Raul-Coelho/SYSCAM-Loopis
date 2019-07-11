@@ -7,14 +7,14 @@ export class ConfigService {
 
   private urlService:string;
 
-  constructor() { 
+  constructor() {
 
-    this.urlService = 'http://localhost:8090';
- 
+    this.urlService = 'http://localhost:8085';
+
   }
 
   getUrlService(): string {
- 
+
     return this.urlService;
   }
 }
