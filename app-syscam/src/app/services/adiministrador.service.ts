@@ -23,12 +23,12 @@ export class AdministradorService {
      return this.http.post(this.baseUrlService, admin);
    }
 
-   deleteAdministrador(codigo:number){
-     return this.http.delete(this.baseUrlService + codigo);
+   deleteAdministrador(email:string){
+     return this.http.delete(this.baseUrlService + email);
    }
 
-   getAdministrador(codigo:number){
-     return this.http.get(this.baseUrlService + codigo);
+   getAdministrador(email:string){
+     return this.http.get(this.baseUrlService + email);
    }
 
    updateAdministrador(admin: Administrador){

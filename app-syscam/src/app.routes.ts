@@ -9,8 +9,7 @@ const appRoutes: Routes = [
     { path: '',                        component: HomeComponent },
     { path: 'consulta-admin',         component: ConsultaComponent },
     { path: 'cadastro-admin',         component: CadastroComponent },
-    { path: 'cadastro-admin/:codigo', component: CadastroComponent }
- 
+    { path: 'cadastro-admin/:email', component: CadastroComponent } 
 ];
  
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

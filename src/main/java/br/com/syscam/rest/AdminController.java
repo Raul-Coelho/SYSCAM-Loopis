@@ -17,11 +17,16 @@ public class AdminController {
     @Autowired
     private AdminService service;
 
+    @GetMapping(value = "/teste")
+    public @ResponseBody String teste(){
+        return "NUmfoi";
+    }
+
     @PostMapping
     public @ResponseBody boolean salvar(@RequestBody Administrador administrador) {
 
         try {
-           if(buscar(administrador.getCodigo()).isPresent()){
+           if(buscar(administrador.getEmail()).isPresent()){
                return false;
            }else {
                service.salvar(administrador);
@@ -33,9 +38,9 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/{codigo}")
-    public @ResponseBody Optional<Administrador> buscar(@PathVariable("codigo") Integer codigo) {
-        return service.buscar(codigo);
+    @GetMapping("/{email}")
+    public @ResponseBody Optional<Administrador> buscar(@PathVariable("email") String email) {
+        return service.buscar(email);
     }
 
     @GetMapping
@@ -46,18 +51,18 @@ public class AdminController {
 
     @PutMapping
     public @ResponseBody boolean atualizar(@RequestBody Administrador administrador) {
-        if (buscar(administrador.getCodigo()).isPresent()) {
+        if (buscar(administrador.getEmail()).isPresent()) {
             this.service.atualizar(administrador);
             return true;
         }
         return false;
     }
 
-    @DeleteMapping("/{codigo}")
-    public @ResponseBody boolean remover(@PathVariable("codigo") Integer codigo){
+    @DeleteMapping("/{email}")
+    public @ResponseBody boolean remover(@PathVariable("email") String email){
         try{
-            if(buscar(codigo).isPresent()){
-                service.remover(codigo);
+            if(buscar(email).isPresent()){
+                service.remover(email);
                 return true;
             }
             return false;
