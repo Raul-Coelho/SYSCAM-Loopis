@@ -13,6 +13,7 @@ import { ConsultaComponent } from './administrador/consulta/consulta.component';
 import { MenuComponent } from './administrador/menu/menu.component';
 import { routing } from 'src/app.routes';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms/'
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -28,12 +29,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms/'
     AppRoutingModule,
     HttpClientModule,
     routing,
-    FormsModule
+    FormsModule,
 
   ],
   providers: [
     ConfigService,
-    AdministradorService
+    AdministradorService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

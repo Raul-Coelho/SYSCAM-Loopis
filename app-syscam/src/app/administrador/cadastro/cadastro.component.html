@@ -3,16 +3,16 @@
     <br/>
     <h3>{{titulo}}</h3>
 
-    <label>Código:
+    <!-- <label>Código:
         <input type="input" name="codigo" size="10" disabled/>
+    </label><br/><br/> -->
+
+    <label>Email:
+        <input type="input" name="email" size="30" [(ngModel)]="admin.email"/>
     </label><br/><br/>
 
     <label>Nome:
         <input type="input" name="nome" size="30" [(ngModel)]="admin.nome"/>
-    </label><br/><br/>
-
-    <label>Email:
-        <input type="input" name="email" size="30" [(ngModel)]="admin.email"/>
     </label><br/><br/>
 
     <label>Senha:

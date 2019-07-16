@@ -17,7 +17,7 @@ public class AdminService {
     public boolean salvar(Administrador administrador) {
 
         try {
-            if (!buscar(administrador.getCodigo()).isPresent()) {
+            if (!buscar(administrador.getEmail()).isPresent()) {
                 this.repository.save(administrador);
                 return true;
             }else {
@@ -29,12 +29,12 @@ public class AdminService {
         }
     }
 
-    public Optional<Administrador> buscar(Integer codigo) {
-        return this.repository.findById(codigo);
+    public Optional<Administrador> buscar(String email) {
+        return this.repository.findById(email);
     }
 
     public boolean atualizar(Administrador administrador) {
-        if (buscar(administrador.getCodigo()).isPresent()) {
+        if (buscar(administrador.getEmail()).isPresent()) {
             this.repository.save(administrador);
             return true;
         }
@@ -48,10 +48,10 @@ public class AdminService {
     }
 
 
-    public boolean remover(Integer codigo){
+    public boolean remover(String email){
         try{
-            if(buscar(codigo).isPresent()){
-                repository.deleteById(codigo);
+            if(buscar(email).isPresent()){
+                repository.deleteById(email);
                 return true;
             }
             return false;

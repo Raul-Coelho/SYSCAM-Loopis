@@ -1,5 +1,8 @@
 package br.com.syscam.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,17 +17,12 @@ import java.util.Objects;
 @Entity
 public class Administrador {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_admin")
-    private Integer codigo;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "nome")
     private String nome;
-
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "senha")
     private String senha;
@@ -33,6 +31,8 @@ public class Administrador {
     private String cpf;
 
     @Column(name = "nascimento")
+//    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date nascimento;
 
     public Administrador(String nome, String email, String senha, String cpf, Date nascimento) {
@@ -43,15 +43,14 @@ public class Administrador {
         this.nascimento = nascimento;
     }
 
+    public Administrador(String nome, String email, String senha, String cpf) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+    }
+
     public Administrador() {
-    }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
