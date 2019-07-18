@@ -22,9 +22,9 @@ export class ConsultaComponent implements OnInit {
     this.administradorService.getAdministradores().subscribe(res => this.admins = res);
   }
 
-  deletar(codigo:number, index:number): void{
+  deletar(email:string, index:number): void{
     if(confirm("Deseja realmente excluir esse registro?")){
-      this.administradorService.deleteAdministrador(codigo).subscribe(response => {
+      this.administradorService.deleteAdministrador(email).subscribe(response => {
         this.admins.splice(index,1);
       });
     }

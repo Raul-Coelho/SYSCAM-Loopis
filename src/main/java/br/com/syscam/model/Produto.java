@@ -22,8 +22,8 @@ public class Produto {
     private String fornecedor;
     private int quantidade;
 
-    @OneToOne(mappedBy = "protocolo")
-    private Movimentacao movimentacao;
+//    @OneToOne(mappedBy = "protocolo")
+//    private Movimentacao movimentacao;
 
     public Produto() {
     }
@@ -84,13 +84,13 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public Movimentacao getMovimentacao() {
-        return movimentacao;
-    }
-
-    public void setMovimentacao(Movimentacao movimentacao) {
-        this.movimentacao = movimentacao;
-    }
+//    public Movimentacao getMovimentacao() {
+//        return movimentacao;
+//    }
+//
+//    public void setMovimentacao(Movimentacao movimentacao) {
+//        this.movimentacao = movimentacao;
+//    }
 
     @Override
     public boolean equals(Object o) {

@@ -17,8 +17,8 @@ public class Movimentacao  {
     private int protocolo;
     @Temporal(TemporalType.DATE)
     private Date data;
-    @Temporal(TemporalType.TIME)
-    private Time hora;
+//    @Temporal(TemporalType.TIME)
+//    private Time hora;
     private float subTotal;
 
     @OneToOne
@@ -30,14 +30,14 @@ public class Movimentacao  {
 
     public Movimentacao(Date data, Time hora, float subTotal, Produto produto) {
         this.data = data;
-        this.hora = hora;
+//        this.hora = hora;
         this.subTotal = subTotal;
         this.produto = produto;
     }
 
     public Movimentacao(Date data, Time hora, float subTotal) {
         this.data = data;
-        this.hora = hora;
+//        this.hora = hora;
         this.subTotal = subTotal;
     }
 
@@ -56,14 +56,14 @@ public class Movimentacao  {
     public void setData(Date data) {
         this.data = data;
     }
-
-    public Time getHora() {
-        return hora;
-    }
-
-    public void setHora(Time hora) {
-        this.hora = hora;
-    }
+//
+//    public Time getHora() {
+//        return hora;
+//    }
+//
+//    public void setHora(Time hora) {
+//        this.hora = hora;
+//    }
 
     public float getSubTotal() {
         return subTotal;
@@ -89,12 +89,11 @@ public class Movimentacao  {
         return protocolo == that.protocolo &&
                 Float.compare(that.subTotal, subTotal) == 0 &&
                 Objects.equals(data, that.data) &&
-                Objects.equals(hora, that.hora) &&
                 Objects.equals(produto, that.produto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(protocolo, data, hora, subTotal, produto);
+        return Objects.hash(protocolo, data, subTotal, produto);
     }
 }
