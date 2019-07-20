@@ -1,1 +1,0 @@
-sudo ./stop.sh && sudo ./run.sh

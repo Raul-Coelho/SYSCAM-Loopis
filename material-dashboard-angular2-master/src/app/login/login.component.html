@@ -1,0 +1,15 @@
+<form (ngSubmit)="login()">
+  <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label><b>Username</b></label>
+    <input type="text" [(ngModel)]="admin.email"  placeholder="Enter Email" name="email" required>
+
+    <label><b>Password</b></label>
+    <input type="password" [(ngModel)]="admin.senha" placeholder="Enter Password" name="senha" required>
+
+    <button type="submit">Login</button>
+  </div>
+</form>

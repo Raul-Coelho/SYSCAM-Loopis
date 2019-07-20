@@ -33,7 +33,6 @@ public class AdminController {
                return true;
            }
         } catch (Exception e) {
-
             return false;
         }
     }
@@ -69,6 +68,17 @@ public class AdminController {
         }catch (Exception e){
             return false;
         }
+    }
+
+    @PostMapping("/login")
+    public @ResponseBody boolean login(@RequestBody Administrador administrador){
+        Optional<Administrador> admin = buscar(administrador.getEmail());
+        if(admin.isPresent()){
+            if(admin.get().getSenha().equals(administrador.getSenha())){
+                return true;
+            }
+        }
+        return false;
     }
 
 

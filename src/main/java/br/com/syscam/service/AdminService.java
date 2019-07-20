@@ -59,4 +59,14 @@ public class AdminService {
             return false;
         }
     }
+
+    public boolean login(String email,String senha){
+        Optional<Administrador> admin = buscar(email);
+        if(admin.isPresent()){
+            if(admin.get().getSenha().equals(senha)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
