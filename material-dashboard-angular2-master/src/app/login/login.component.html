@@ -1,15 +1,41 @@
-<form (ngSubmit)="login()">
-  <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+<div class="main-content" style="margin-left: 30%">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Login</h4>
+            <p class="card-category">Join in SysCAM</p>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="login()">
+              <div>
+                <img src="../../assets/img/SysCAM.png" style="width: 300px; margin-left: 10%">
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 md-form">
+                    <input mdbInput class="form-control" type="text" [(ngModel)]="admin.email" placeholder="Email"
+                      name="email" required>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-md-12 md-form">
+                    <input mdbInput class="form-control" type="password" [(ngModel)]="admin.senha" placeholder="Password"
+                      name="senha" required>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-md-8">
+                      <button mat-raised-button type="submit" class="btn btn-danger pull-right">Login</button>
+                      <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="container">
-    <label><b>Username</b></label>
-    <input type="text" [(ngModel)]="admin.email"  placeholder="Enter Email" name="email" required>
-
-    <label><b>Password</b></label>
-    <input type="password" [(ngModel)]="admin.senha" placeholder="Enter Password" name="senha" required>
-
-    <button type="submit">Login</button>
-  </div>
-</form>
+</div>
