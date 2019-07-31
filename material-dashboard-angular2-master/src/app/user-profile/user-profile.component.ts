@@ -17,9 +17,16 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private administradorService: AdministradorService, 
     private router: Router, 
-    private activatedRoute: ActivatedRoute, private datapipe: DatePipe) { }
+    private activatedRoute: ActivatedRoute, private datapipe: DatePipe) { 
+    }
 
   ngOnInit() {
+    this.admin = JSON.parse(sessionStorage.getItem("adminLogado"));
+    this.administradorService.getAdministrador(this.admin.email).subscribe(adm =>{
+      this.admin = adm;
+      sessionStorage.setItem("adminLogado", this.admin);
+
+    });
     
   }
 
@@ -27,11 +34,13 @@ export class UserProfileComponent implements OnInit {
       console.log(this.admin);
       let data = this.admin.nascimento.toString();
       this.admin.nascimento = data.split('T')[0];
-      this.administradorService.addAdministrador(this.admin).subscribe(response => {
-        this.admin = new Administrador();
+      this.administradorService.updateAdministrador(this.admin).subscribe(response => {
+        if(response == true){
+          sessionStorage.setItem("adminLogado", JSON.stringify(this.admin));
+          return
+        }
         console.log(response);
-        
-        
+          
       });
   }
 

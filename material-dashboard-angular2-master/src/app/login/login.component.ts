@@ -10,22 +10,29 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  private admin:Administrador;
+  private admin: Administrador;
 
-  constructor(private administradorService: AdministradorService, 
-    private router: Router, 
-    private activatedRoute: ActivatedRoute,) {
+  constructor(private administradorService: AdministradorService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute, ) {
 
-   }
+  }
 
   ngOnInit() {
     this.admin = new Administrador();
   }
 
-  login():void{
+  login(): void {
     this.administradorService.login(this.admin).subscribe(response => {
-      this.admin = new Administrador();
-      this.router.navigate(['dashboard']);
+      if (response == true) {
+          sessionStorage.setItem("adminLogado", JSON.stringify(this.admin));
+          console.log(response);
+          this.router.navigate(['dashboard']);  
+
+      }
+      else{
+        return
+      }
       console.log(response);
     })
   }
