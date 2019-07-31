@@ -24,13 +24,13 @@ export class UserProfileComponent implements OnInit {
     this.admin = JSON.parse(sessionStorage.getItem("adminLogado"));
     this.administradorService.getAdministrador(this.admin.email).subscribe(adm =>{
       this.admin = adm;
-      sessionStorage.setItem("adminLogado", this.admin);
+      sessionStorage.setItem("adminLogado", JSON.stringify(this.admin));
 
     });
     
   }
 
-  salvar():void {
+  editar():void {
       console.log(this.admin);
       let data = this.admin.nascimento.toString();
       this.admin.nascimento = data.split('T')[0];
