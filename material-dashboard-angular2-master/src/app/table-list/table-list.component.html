@@ -23,6 +23,9 @@
                                     <th>
                                         Birth
                                     </th>
+                                    <th>
+                                        Delete
+                                    </th>
                                     
                                 </thead>
                                 <tbody>
@@ -31,6 +34,14 @@
                                         <td>{{ admin.email }}</td>
                                         <td>{{ admin.cpf }}</td>        
                                         <td>{{ admin.nascimento}}</td>  
+                                        <td>
+                                            <button class="btn btn-danger" type="button" (click)="deletar(admin)">
+                                                <i class="material-icons">
+                                                    delete
+                                                </i>
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

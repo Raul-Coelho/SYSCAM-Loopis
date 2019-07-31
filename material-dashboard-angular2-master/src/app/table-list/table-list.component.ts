@@ -1,3 +1,4 @@
+import { Administrador } from './../models/administrador';
 import { AdministradorService } from './../services/administrador.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,21 +18,19 @@ export class TableListComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.titulo = "Registros Cadastrados!";
     this.administradorService.getAdministradores().subscribe(res => this.admins = res);
+  
   }
 
-  // deletar(email:string, index:number): void{
-  //   if(confirm("Deseja realmente excluir esse registro?")){
-  //     this.administradorService.deleteAdministrador(email).subscribe(response => {
-  //       this.admins.splice(index,1);
-  //     });
-  //   }
-  // }
-
-  // editar(codigo:number):void{
-  //   this.router.navigate(['cadastro-admin',codigo]);
-  // }
-
-
+  deletar(admin:Administrador):void{
+    if(confirm("Deseja realmente excluir esse Admin?")){
+      this.administradorService.deleteAdministrador(admin.email).subscribe(res =>{
+        if(res == true){
+          this.administradorService.getAdministradores().subscribe(res => this.admins = res);
+          return
+        }
+      });
+    }
+  }
+ 
 }
