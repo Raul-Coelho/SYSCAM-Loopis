@@ -3,10 +3,12 @@ package br.com.syscam.service;
 import br.com.syscam.model.Movimentacao;
 import br.com.syscam.repository.MovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MovimentacaoService {
 
     @Autowired
