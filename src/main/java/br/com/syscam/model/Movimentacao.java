@@ -9,35 +9,33 @@ import java.util.Objects;
 
 
 @Entity
-@SequenceGenerator(name="rand_protocol",sequenceName = "protocol_rand",initialValue = Calendar.YEAR*100,allocationSize = 1)
 public class Movimentacao  {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "rand_protocol")
+    @GeneratedValue
     private int protocolo;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date data;
-//    @Temporal(TemporalType.TIME)
-//    private Time hora;
+
     private float subTotal;
 
     @OneToOne
+    @JoinColumn(name="produto_id")
     private Produto produto;
 
 
     public Movimentacao() {
     }
 
-    public Movimentacao(Date data, Time hora, float subTotal, Produto produto) {
+    public Movimentacao(Date data, float subTotal, Produto produto) {
         this.data = data;
-//        this.hora = hora;
         this.subTotal = subTotal;
         this.produto = produto;
     }
 
-    public Movimentacao(Date data, Time hora, float subTotal) {
+    public Movimentacao(Date data, float subTotal) {
         this.data = data;
-//        this.hora = hora;
+
         this.subTotal = subTotal;
     }
 
@@ -56,14 +54,6 @@ public class Movimentacao  {
     public void setData(Date data) {
         this.data = data;
     }
-//
-//    public Time getHora() {
-//        return hora;
-//    }
-//
-//    public void setHora(Time hora) {
-//        this.hora = hora;
-//    }
 
     public float getSubTotal() {
         return subTotal;
