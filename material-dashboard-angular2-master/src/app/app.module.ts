@@ -29,6 +29,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './login/login.component';
+import { MatDialogModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { LoginComponent } from './login/login.component';
     HttpClientModule,
     BrowserModule,
     ComponentsModule,
+
     RouterModule,
     AppRoutingModule,
     FormsModule,
