@@ -57,14 +57,14 @@ public class ProdutoController {
     @PutMapping
     public @ResponseBody boolean atualizar (@RequestBody Produto produto ){
         if(buscar(produto.getCodigo()).isPresent()){
-            produtoService.salvar(produto);
+            produtoService.atualizar(produto);
             return true;
         }
         return false;
     }
 
     @DeleteMapping("/{codigo}")
-    public @ResponseBody boolean remover(@RequestBody int codigo){
+    public @ResponseBody boolean remover(@PathVariable("codigo") int codigo){
         try{
             if(buscar(codigo).isPresent()){
                 produtoService.deletar(codigo);

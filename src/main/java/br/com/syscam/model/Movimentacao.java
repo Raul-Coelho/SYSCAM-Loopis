@@ -20,7 +20,7 @@ public class Movimentacao  {
 
     private Double subTotal;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="produto_id")
     private Produto produto;
 
