@@ -8,12 +8,7 @@ import br.com.syscam.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Calendar;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +53,7 @@ public class ProdutoController {
     @PutMapping
     public @ResponseBody boolean atualizar (@RequestBody Produto produto ){
         if(buscar(produto.getCodigo()).isPresent()){
+            movimento(produto);
             produtoService.atualizar(produto);
             return true;
         }
@@ -68,6 +64,7 @@ public class ProdutoController {
     public @ResponseBody boolean remover(@PathVariable("codigo") int codigo){
         try{
             if(buscar(codigo).isPresent()){
+                movimento(buscar(codigo).get());
                 produtoService.deletar(codigo);
                 return true;
             }
@@ -77,5 +74,20 @@ public class ProdutoController {
         }
     }
 
+    private void movimento(Produto produto){
+        int quantidade = 0;
+        Double subTotal;
+        Optional<Produto> produtoAnterior = produtoService.buscar(produto.getCodigo());
+        if(produto.getQuantidade()>produtoAnterior.get().getQuantidade()){
+            quantidade = produto.getQuantidade()-produtoAnterior.get().getQuantidade();
+            subTotal=produto.getPreco()*quantidade;
+            movimentacaoService.salvarMovimento(quantidade,subTotal,produto.getDescricao(),false);
+        }else{
+            quantidade = produtoAnterior.get().getQuantidade()-produto.getQuantidade();
+            subTotal=produto.getPreco()*quantidade;
+            movimentacaoService.salvarMovimento(quantidade,subTotal,produto.getDescricao(),true);
+        }
+
+    }
 
 }

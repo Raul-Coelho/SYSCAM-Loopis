@@ -1,7 +1,6 @@
 package br.com.syscam.rest;
 
 import br.com.syscam.model.Administrador;
-import br.com.syscam.repository.PessoaRepository;
 import br.com.syscam.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
