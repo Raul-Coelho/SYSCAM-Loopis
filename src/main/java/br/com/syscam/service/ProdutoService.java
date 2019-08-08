@@ -40,8 +40,14 @@ public class ProdutoService {
 
     }
 
-    public List<Produto> listar(){
-        return  this.produtoRepository.findAll();
+
+    public List<Produto> listar(String referencia){
+        if(referencia.isEmpty()){
+            return this.produtoRepository.findAll();
+        }
+            return this.produtoRepository.findByDescricaoLike(referencia.toLowerCase());
+
+
     }
 
     public boolean deletar(int codigo){

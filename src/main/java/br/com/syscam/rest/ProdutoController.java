@@ -23,6 +23,7 @@ public class ProdutoController {
     @Autowired
     private MovimentacaoService movimentacaoService;
 
+
     @PostMapping
     public @ResponseBody boolean salvar(@RequestBody Produto produto){
         try{
@@ -47,8 +48,16 @@ public class ProdutoController {
 
     @GetMapping
     public @ResponseBody List<Produto> listar(){
-        return produtoService.listar();
+        return produtoService.listar("");
+
     }
+    @GetMapping("/buscar")
+    public @ResponseBody List<Produto> buscarProdutos(@RequestParam(value = "referencia",required =false)
+                                                      String referencia){
+        return produtoService.listar(referencia);
+
+    }
+
 
     @PutMapping
     public @ResponseBody boolean atualizar (@RequestBody Produto produto ){
