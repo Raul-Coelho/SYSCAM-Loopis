@@ -1,5 +1,7 @@
 package br.com.syscam.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,6 +17,7 @@ public class Movimentacao  {
     private int protocolo;
 
     @Column(name="data",columnDefinition = "DATE")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate data;
 
     @Column(name="time", columnDefinition = "TIME")
