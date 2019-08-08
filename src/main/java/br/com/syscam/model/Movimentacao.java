@@ -1,7 +1,9 @@
 package br.com.syscam.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 
@@ -13,14 +15,17 @@ public class Movimentacao  {
     @GeneratedValue
     private int protocolo;
 
-    @Column(name="data_time",columnDefinition = "TIMESTAMP")
-    private LocalDateTime datatime;
+    @Column(name="data",columnDefinition = "DATE")
+    private LocalDate data;
+
+    @Column(name="time", columnDefinition = "TIME")
+    private LocalTime time;
 
     private boolean isVenda;
 
     private Double subTotal;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name="produto_id")
     private Produto produto;
 
@@ -28,15 +33,17 @@ public class Movimentacao  {
     public Movimentacao() {
     }
 
-    public Movimentacao(LocalDateTime datatime, Double subTotal, boolean isVenda, Produto produto) {
-        this.datatime = datatime;
+    public Movimentacao(LocalDate data,LocalTime time, Double subTotal, boolean isVenda, Produto produto) {
+        this.data = data;
+        this.time=time;
         this.subTotal = subTotal;
         this.produto = produto;
         this.isVenda=isVenda;
     }
 
-    public Movimentacao(LocalDateTime datatime, Double subTotal) {
-        this.datatime = datatime;
+    public Movimentacao(LocalDate data,LocalTime time, Double subTotal) {
+        this.data = data;
+        this.time=time;
 
         this.subTotal = subTotal;
     }
@@ -49,12 +56,28 @@ public class Movimentacao  {
         this.protocolo = protocolo;
     }
 
-    public LocalDateTime getDatatime() {
-        return datatime;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setDatatime(LocalDateTime datatime) {
-        this.datatime = datatime;
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
+    public boolean isVenda() {
+        return isVenda;
+    }
+
+    public void setVenda(boolean venda) {
+        isVenda = venda;
     }
 
     public Double getSubTotal() {

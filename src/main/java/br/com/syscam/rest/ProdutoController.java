@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class ProdutoController {
             if(!buscar(produto.getCodigo()).isPresent()){
                 produtoService.salvar(produto);
                 Double subTotal = produto.getPreco()*produto.getQuantidade();
-                movimentacaoService.salvar(new Movimentacao(LocalDateTime.now(),subTotal,false,produto));
+                movimentacaoService.salvar(new Movimentacao(LocalDate.now(), LocalTime.now(),subTotal,false,produto));
                 return true;
             }else{
                 return false;
@@ -75,7 +76,6 @@ public class ProdutoController {
             return false;
         }
     }
-
 
 
 }
