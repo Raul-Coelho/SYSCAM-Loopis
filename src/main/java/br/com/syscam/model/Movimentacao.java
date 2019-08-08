@@ -25,27 +25,36 @@ public class Movimentacao  {
 
     private Double subTotal;
 
-    @OneToOne
-    @JoinColumn(name="produto_id")
-    private Produto produto;
+    private String nomeProduto;
 
+    private int quantMovimento;
 
     public Movimentacao() {
     }
 
-    public Movimentacao(LocalDate data,LocalTime time, Double subTotal, boolean isVenda, Produto produto) {
+    public Movimentacao(LocalDate data, LocalTime time, boolean isVenda, Double subTotal, String nomeProduto, int quantMovimento) {
         this.data = data;
-        this.time=time;
+        this.time = time;
+        this.isVenda = isVenda;
         this.subTotal = subTotal;
-        this.produto = produto;
-        this.isVenda=isVenda;
+        this.nomeProduto = nomeProduto;
+        this.quantMovimento = quantMovimento;
     }
 
-    public Movimentacao(LocalDate data,LocalTime time, Double subTotal) {
-        this.data = data;
-        this.time=time;
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
 
-        this.subTotal = subTotal;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public int getQuantMovimento() {
+        return quantMovimento;
+    }
+
+    public void setQuantMovimento(int quantMovimento) {
+        this.quantMovimento = quantMovimento;
     }
 
     public int getProtocolo() {
@@ -86,14 +95,6 @@ public class Movimentacao  {
 
     public void setSubTotal(Double subTotal) {
         this.subTotal = subTotal;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
     }
 
     public boolean isIsVenda() {

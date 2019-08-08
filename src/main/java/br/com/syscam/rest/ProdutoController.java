@@ -34,7 +34,7 @@ public class ProdutoController {
             if(!buscar(produto.getCodigo()).isPresent()){
                 produtoService.salvar(produto);
                 Double subTotal = produto.getPreco()*produto.getQuantidade();
-                movimentacaoService.salvar(new Movimentacao(LocalDate.now(), LocalTime.now(),subTotal,false,produto));
+                movimentacaoService.salvar(produto);
                 return true;
             }else{
                 return false;

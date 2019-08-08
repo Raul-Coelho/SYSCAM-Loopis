@@ -1,10 +1,13 @@
 package br.com.syscam.service;
 
 import br.com.syscam.model.Movimentacao;
+import br.com.syscam.model.Produto;
 import br.com.syscam.repository.MovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,14 +17,18 @@ public class MovimentacaoService {
     @Autowired
     private MovimentacaoRepository movimentacaoRepository;
 
-    public boolean salvar(Movimentacao movimentacao){
+    public boolean salvar(Produto produto){
         try {
-            if(!buscar(movimentacao.getProtocolo()).isPresent()){
+                Movimentacao movimentacao = new Movimentacao(
+                        LocalDate.now(),
+                        LocalTime.now(),
+                        false,
+                        produto.getPreco()*produto.getQuantidade(),
+                        produto.getDescricao(),
+                        produto.getQuantidade()
+                );
                 this.movimentacaoRepository.save(movimentacao);
                 return true;
-            }else{
-                return false;
-            }
         }catch (Exception e){
             return false;
         }
@@ -55,4 +62,5 @@ public class MovimentacaoService {
             return false;
         }
     }
+
 }
