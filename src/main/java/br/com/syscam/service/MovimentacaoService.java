@@ -63,4 +63,21 @@ public class MovimentacaoService {
         }
     }
 
+    public boolean salvarMovimento(int quantidade, Double preco, String produto, boolean isVenda) {
+        try{
+            Movimentacao movimentacao = new Movimentacao(
+                    LocalDate.now(),
+                    LocalTime.now(),
+                    isVenda,
+                    preco,
+                    produto,
+                    quantidade
+            );
+            movimentacaoRepository.save(movimentacao);
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
+
+    }
 }
