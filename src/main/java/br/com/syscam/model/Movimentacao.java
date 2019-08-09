@@ -99,7 +99,7 @@ public class Movimentacao  {
         this.subTotal = subTotal;
     }
 
-    public boolean isIsVenda() {
+    public boolean getIsVenda() {
         return isVenda;
     }
 

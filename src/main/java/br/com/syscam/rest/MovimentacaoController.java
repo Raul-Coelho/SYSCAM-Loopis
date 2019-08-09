@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,22 @@ public class MovimentacaoController {
     private MovimentacaoService movimentacaoService;
 
 
+    @GetMapping(value = "/totalEntrada")
+    public @ResponseBody Double totalEntrada(){
+        return movimentacaoService.totalEntrada;
+    }
+    @GetMapping(value = "/totalSaida")
+    public @ResponseBody Double totalSaida(){
+        return movimentacaoService.totalSaida;
+    }
+    @GetMapping(value = "/totalGeral")
+    public @ResponseBody Double totalGeral(){
+        return movimentacaoService.totalGeral;
+    }
+    @GetMapping(value = "/lucro")
+    public @ResponseBody Double lucro(){
+        return movimentacaoService.lucro;
+    }
 
     @GetMapping("/{protocolo}")
     public @ResponseBody Optional<Movimentacao> buscar(@PathVariable("protocolo") int protocolo){

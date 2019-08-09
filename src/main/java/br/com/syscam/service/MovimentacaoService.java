@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
@@ -21,6 +19,13 @@ public class MovimentacaoService {
 
     @Autowired
     private MovimentacaoRepository movimentacaoRepository;
+
+    public Double totalEntrada;
+
+    public Double totalSaida;
+
+    public Double totalGeral;
+    public Double lucro;
 
     public boolean salvar(Produto produto){
         try {
@@ -52,7 +57,9 @@ public class MovimentacaoService {
     }
 
     public List<Movimentacao> listar(){
-        return this.movimentacaoRepository.findAll();
+        List<Movimentacao> list = this.movimentacaoRepository.findAll();
+        calcTotais(list);
+        return list;
     }
 
     public boolean remover(int protocolo){
@@ -72,10 +79,15 @@ public class MovimentacaoService {
         DateTimeFormatter formato= DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dateInicio = LocalDate.parse(inicio,formato);
         LocalDate dateFim = LocalDate.parse(fim,formato);
+        List<Movimentacao> list;
         if(dateFim.isBefore(dateInicio)){
+            this.totalEntrada=0.0;
+            this.totalSaida=0.0;
             return Collections.emptyList();
         }else{
-            return movimentacaoRepository.findByDataBetween(dateInicio,dateFim);
+            list= movimentacaoRepository.findByDataBetween(dateInicio,dateFim);
+            calcTotais(list);
+            return list;
         }
     }
 
@@ -96,4 +108,29 @@ public class MovimentacaoService {
         }
 
     }
+
+    private void calcTotais(List<Movimentacao> list){
+        this.totalEntrada=calcTotalEntrada(list);
+        this.totalSaida=calcTotalSaida(list);
+        this.totalGeral = totalEntrada+totalSaida;
+        this.lucro = totalSaida-totalEntrada;
+    }
+
+    private Double calcTotalEntrada(List<Movimentacao> list){
+        Double totalEntrada = new Double(0);
+        for (Movimentacao m : list){
+            if(m.getIsVenda()==false){
+                totalEntrada+=m.getSubTotal();
+            }
+        }return totalEntrada;
+    }
+    private Double calcTotalSaida(List<Movimentacao> list){
+        Double totalSaida= new Double(0);
+        for (Movimentacao m : list){
+            if(m.getIsVenda()==true){
+                totalSaida+=m.getSubTotal();
+            }
+        }return totalSaida;
+    }
+    
 }

@@ -11,5 +11,5 @@ import java.util.List;
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao,Integer> {
 
     @Query("SELECT m FROM Movimentacao m WHERE m.data BETWEEN ?1 AND ?2 ORDER BY m.data ASC")
-    public List<Movimentacao> findByDataBetween(LocalDate inicio, LocalDate fim);
+    List<Movimentacao> findByDataBetween(LocalDate inicio, LocalDate fim);
 }
