@@ -8,7 +8,7 @@ export class ConfigService {
 
   constructor() {
 
-    this.urlService = 'http://localhost:8090';
+    this.urlService = 'https://syscamloopis-api.herokuapp.com/';
 
   }
 
